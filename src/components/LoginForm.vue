@@ -1,4 +1,5 @@
 <script>
+import { useUserStore } from '../stores/userStore';
 import { useRouter } from 'vue-router';
 import { usuarios } from '@/models/usuario';
 
@@ -16,7 +17,8 @@ export default {
     },
     setup() {
         const router = useRouter();
-        return { router };
+        const userStore = useUserStore();
+        return { router, userStore };
     },
     // Modelo de metodos que realiza el componente
     methods: {
@@ -27,6 +29,10 @@ export default {
             if (usuarioEncontrado) {
                 this.success = 'Login existoso';
                 this.error = null;
+
+                // Almacenar el usuario en la tienda
+                this.userStore.setUser(this.form.username, this.form.password);
+
                 // Navegar a HomeView
                 this.router.push({ name: 'home' });
             } else {
