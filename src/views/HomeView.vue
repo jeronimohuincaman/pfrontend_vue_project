@@ -1,26 +1,12 @@
-<script>
-import { useUserStore } from '../stores/userStore';
-import { useRouter } from 'vue-router';
+<script setup lang="ts">
+import MovimientosView from './MovimientosView.vue';
 
-export default {
-  setup() {
-    const router = useRouter();
-    const userStore = useUserStore();
-    const logout = () => {
-      userStore.logout();
-      router.push({ name: 'loginPage' });
-    };
-
-    return { router, userStore, logout };
-  },
-};
 </script>
 
 <template>
   <div class="home-container">
-    <h1>Bienvenidos a la patalla Home</h1>
-    <p v-if="userStore.isLoggedIn">Hola Usuario, {{ userStore.username }}!</p>
-    <button @click="logout">Cerrar Sesion</button>
+    <h1>Bienvenidos a la pantalla Home</h1>
+    <MovimientosView />
   </div>
 </template>
 
